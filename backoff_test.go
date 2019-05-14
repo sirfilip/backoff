@@ -33,3 +33,12 @@ func TestScuccess(t *testing.T) {
 		t.Errorf("Expected nil but got: %v", err)
 	}
 }
+
+func TestZeroRetries(t *testing.T) {
+	err := Retry(func() error {
+		return errors.New("Failure")
+	}, 0, time.Minute)
+	if err != nil {
+		t.Errorf("Expected nil got error: %v", err)
+	}
+}

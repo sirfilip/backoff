@@ -2,11 +2,12 @@ package backoff
 
 import "time"
 
-func Retry(f func() error, times int, duration time.Duration) error {
+func Retry(f func() error, times uint, duration time.Duration) error {
 	var err error
 	var durations []time.Duration
+	var i uint
 
-	for i := 0; i < times; i++ {
+	for i = 0; i < times; i++ {
 		durations = append(durations, duration)
 		duration = time.Duration(duration + duration)
 	}
